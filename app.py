@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configurações do Flask
-app = Flask(__name__, static_url_path='/static', template_folder='templates')
+app = Flask(__name__)
 CORS(app)
 
 # Configurações do banco de dados
