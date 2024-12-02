@@ -5,6 +5,7 @@ import os
 import json
 from dotenv import load_dotenv
 import traceback
+import pandas as pd
 
 # Carregar variáveis de ambiente
 load_dotenv()
@@ -26,8 +27,8 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/api/modalidades', methods=['GET'])
-def get_modalidades():
+@app.route('/api/modalidade', methods=['GET'])
+def get_modalidade():
     """Retorna uma lista de modalidades esportivas."""
     try:
         connection = mysql.connector.connect(
@@ -36,7 +37,7 @@ def get_modalidades():
         cursor = connection.cursor()
         query = "SELECT DISTINCT modalidade FROM Esportivo"
         cursor.execute(query)
-        modalidades = [row[0] for row in cursor.fetchall()]
+        modalidade = [row[0] for row in cursor.fetchall()]
     except Exception as e:
         error_message = f"Erro ao buscar modalidades: {e}\n{traceback.format_exc()}"
         print(error_message)
@@ -46,7 +47,7 @@ def get_modalidades():
             cursor.close()
         if connection:
             connection.close()
-    return jsonify(modalidades)
+    return jsonify(modalidade)
 
 
 @app.route('/api/dados', methods=['GET'])
@@ -99,6 +100,34 @@ def get_data():
             connection.close()
     return jsonify(data)
 
+
+@app.route('/api/json', methods=['GET'])
+def generate_json():
+    """Gera e salva um arquivo JSON com dados do banco."""
+    try:
+        connection = mysql.connector.connect(
+            host=DB_HOST, user=DB_USER, password=DB_PASSWORD, database=DB_NAME
+        )
+        query = """
+        SELECT 
+            c.idCadastro, c.email, g.genero, d.estado, e.remuneracao, es.modalidade
+        FROM Cadastro c
+        JOIN Geral g ON c.idCadastro = g.idCadastro
+        JOIN Demografico d ON c.idCadastro = d.idCadastro
+        JOIN Economico e ON c.idCadastro = e.idCadastro
+        JOIN Esportivo es ON c.idCadastro = es.idCadastro
+        """
+        df = pd.read_sql(query, connection)
+        json_file_path = os.path.join(os.getcwd(), 'dados.json')
+        df.to_json(json_file_path, orient='records', force_ascii=False)
+        return jsonify({"message": "Arquivo JSON gerado com sucesso!"})
+    except Exception as e:
+        error_message = f"Erro ao gerar JSON: {e}\n{traceback.format_exc()}"
+        print(error_message)
+        return jsonify({"error": "Erro ao gerar JSON."}), 500
+    finally:
+        if connection:
+            connection.close()
 
 
 if __name__ == '__main__':

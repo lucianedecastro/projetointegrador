@@ -3,16 +3,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let myChart; // Declara myChart no escopo global
 
-    async function preencherModalidades() {
+    async function preencherModalidade() {
         try {
-            const response = await fetch('/api/modalidades');
+            const response = await fetch('/api/modalidade');
             if (!response.ok) {
                 throw new Error(`Erro na requisição: ${response.status} - ${response.statusText}`);
             }
-            const modalidades = await response.json();
-            const selectModalidade = document.getElementById('modalidade'); // Correção: referência a "modalidade"
+            const modalidade = await response.json();
+            const selectModalidade = document.getElementById('modalidade'); 
 
-            modalidades.forEach(modalidade => {
+            modalidade.forEach(modalidade => {
                 const option = document.createElement('option');
                 option.value = modalidade;
                 option.text = modalidade;
@@ -102,5 +102,5 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    preencherModalidades();
+    preencherModalidade();
 });
