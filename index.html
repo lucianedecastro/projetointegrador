@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDE Conecta</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>MDE Conecta</h1>
+    </header>
+    <main>
+        <section class="filters">
+            <h2>Filtros</h2>
+            <div class="form-group">
+                <label for="estado">Estado:</label>
+                <select id="estado">
+                    <option value="">Todos</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="remuneracao">Remuneração (R$):</label>
+                <input type="number" id="remuneracao" value="0">
+            </div>
+            <div class="form-group">
+                <label for="modalidade">Modalidade Esportiva:</label>
+                <select id="modalidade">
+                    <option value="">Todas</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="genero">Gênero:</label>
+                <select id="genero">
+                    <option value="">Todos</option>
+                    <option value="Feminino">Feminino</option>
+                    <option value="Masculino">Masculino</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="estadoCivil">Estado Civil:</label>
+                <select id="estadoCivil">
+                    <option value="">Todos</option>
+                    <option value="Solteira(o)">Solteira(o)</option>
+                    <option value="Casada(o)">Casada(o)</option>
+                    <option value="Divorciada(o)">Divorciada(o)</option>
+                    <option value="Viúva(o)">Viúva(o)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="escolaridade">Escolaridade:</label>
+                <select id="escolaridade">
+                    <option value="">Todas</option>
+                    <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
+                    <option value="Ensino Médio Completo">Ensino Médio Completo</option>
+                    <option value="Graduação Completa">Graduação Completa</option>
+                    <option value="Pós-Graduação">Pós-Graduação</option>
+                </select>
+            </div>
+            <button onclick="fetchFilteredData()">Aplicar Filtros</button>
+        </section>
+        <section class="chart-container">
+            <canvas id="myChart"></canvas>
+        </section>
+    </main>
+    <script src="/static/script.js"></script>
+</body>
+</html>
