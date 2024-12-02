@@ -1,27 +1,30 @@
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 import mysql.connector
-import json
 import os
+import json
 from dotenv import load_dotenv
+import traceback
 
 # Carregar variáveis de ambiente
 load_dotenv()
 
-# Configurações do Flask
-app = Flask(__name__)
+# Configuração do Flask
+app = Flask(__name__, static_url_path='/static', template_folder='templates')
 CORS(app)
 
-# Configurações do banco de dados
-DB_HOST = os.getenv('HOST')
-DB_USER = os.getenv('USER')
-DB_PASSWORD = os.getenv('PASSWORD')
-DB_NAME = os.getenv('DATABASE')
+# Configuração do banco de dados
+DB_HOST = os.getenv('DB_HOST')
+DB_USER = os.getenv('DB_USER')
+DB_PASSWORD = os.getenv('DB_PASSWORD')
+DB_NAME = os.getenv('DB_NAME')
+
 
 @app.route("/")
 def index():
     """Renderiza a página principal."""
     return render_template("index.html")
+
 
 @app.route('/api/modalidades', methods=['GET'])
 def get_modalidades():
@@ -31,18 +34,20 @@ def get_modalidades():
             host=DB_HOST, user=DB_USER, password=DB_PASSWORD, database=DB_NAME
         )
         cursor = connection.cursor()
-        query = "SELECT DISTINCT modalidade FROM Esportivo"  # Usa o nome correto da coluna "modalidade"
+        query = "SELECT DISTINCT modalidade FROM Esportivo"
         cursor.execute(query)
-        modalidades = [row[0] for row in cursor.fetchall()]  # Mantém a variável como "modalidades"
+        modalidades = [row[0] for row in cursor.fetchall()]
     except Exception as e:
-        print(f"Erro ao buscar modalidades: {e}")
+        error_message = f"Erro ao buscar modalidades: {e}\n{traceback.format_exc()}"
+        print(error_message)
         return jsonify({"error": "Erro ao buscar modalidades."}), 500
     finally:
         if cursor:
             cursor.close()
         if connection:
             connection.close()
-    return jsonify(modalidades)  # Retorna a lista de modalidades
+    return jsonify(modalidades)
+
 
 @app.route('/api/dados', methods=['GET'])
 def get_data():
@@ -50,7 +55,7 @@ def get_data():
     try:
         estado = request.args.get('estado')
         remuneracao = request.args.get('remuneracao', type=float)
-        modalidade = request.args.get('modalidade')  # Usa o nome correto do parâmetro
+        modalidade = request.args.get('modalidade')
         genero = request.args.get('genero')
         estadoCivil = request.args.get('estadoCivil')
         escolaridade = request.args.get('escolaridade')
@@ -77,14 +82,15 @@ def get_data():
         """
         params = (
             estado, estado, remuneracao, remuneracao,
-            modalidade, modalidade, genero, genero,  # Usa "modalidade" como esperado
+            modalidade, modalidade, genero, genero,
             estadoCivil, estadoCivil, escolaridade, escolaridade
         )
         cursor = connection.cursor(dictionary=True)
         cursor.execute(query, params)
         data = cursor.fetchall()
     except Exception as e:
-        print(f"Erro ao buscar dados: {e}")
+        error_message = f"Erro ao buscar dados: {e}\n{traceback.format_exc()}"
+        print(error_message)
         return jsonify({"error": "Erro ao buscar dados."}), 500
     finally:
         if cursor:
@@ -93,16 +99,8 @@ def get_data():
             connection.close()
     return jsonify(data)
 
-@app.route('/api/json', methods=['GET'])
-def get_json():
-    """Retorna o conteúdo do arquivo JSON gerado."""
-    try:
-        with open('dados.json', 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        return jsonify(data)
-    except Exception as e:
-        return jsonify({"error": f"Erro ao ler o JSON: {e}"}), 500
+
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))  
-    app.run(debug=True, host='0.0.0.0', port=port) 
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)
