@@ -1,59 +1,68 @@
+/* Define o estilo geral do corpo da página */
 body {
-    font-family: sans-serif;
-    margin: 20px;
-    background-color: #FAFAFA;
-    color: #333;
+    font-family: sans-serif; /* Define a fonte padrão */
+    margin: 20px; /* Define a margem ao redor do conteúdo */
+    background-color: #FAFAFA; /* Define uma cor de fundo suave */
+    color: #333; /* Define a cor do texto principal */
 }
 
+/* Estiliza o título principal (h1) */
 h1 {
-    color: #b01969;
-    text-align: center;
+    color: #b01969; /* Define a cor do texto do título */
+    text-align: center; /* Centraliza o título */
 }
 
+/* Estiliza o contêiner dos filtros */
 .filters {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    background-color: white; /* Define a cor de fundo como branco */
+    padding: 20px; /* Define o espaçamento interno */
+    border-radius: 8px; /* Adiciona bordas arredondadas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra */
+    margin-bottom: 20px; /* Espaçamento inferior para separar de outros elementos */
 }
 
+/* Define o estilo dos grupos de formulários */
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 15px; /* Espaçamento inferior entre os grupos */
 }
 
+/* Estiliza os rótulos dos campos do formulário */
 label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    display: block; /* Faz com que o rótulo ocupe uma linha completa */
+    margin-bottom: 5px; /* Adiciona um espaçamento inferior */
+    font-weight: bold; /* Define o texto em negrito */
 }
 
+/* Estiliza os campos de seleção e entrada numérica */
 select, input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    width: 100%; /* Faz com que o elemento ocupe toda a largura do contêiner */
+    padding: 8px; /* Adiciona espaçamento interno */
+    border: 1px solid #ccc; /* Define uma borda cinza clara */
+    border-radius: 4px; /* Adiciona bordas arredondadas */
+    box-sizing: border-box; /* Inclui o padding e a borda no tamanho total */
 }
 
+/* Estiliza os botões */
 button {
-    background-color: #b01969;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-    font-weight: bold;
+    background-color: #b01969; /* Define a cor de fundo do botão */
+    color: white; /* Define a cor do texto */
+    border: none; /* Remove a borda padrão */
+    padding: 10px 20px; /* Adiciona espaçamento interno */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    border-radius: 4px; /* Adiciona bordas arredondadas */
+    transition: background-color 0.3s ease; /* Adiciona uma transição suave ao alterar a cor */
+    font-weight: bold; /* Define o texto em negrito */
 }
 
+/* Estiliza o botão ao passar o mouse */
 button:hover {
-    background-color: #8c0049;
+    background-color: #8c0049; /* Altera a cor de fundo ao passar o mouse */
 }
 
+/* Estiliza o contêiner do gráfico */
 .chart-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white; /* Define a cor de fundo como branco */
+    padding: 20px; /* Adiciona espaçamento interno */
+    border-radius: 8px; /* Adiciona bordas arredondadas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra */
 }

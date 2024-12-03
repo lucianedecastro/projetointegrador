@@ -1,71 +1,98 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MDE Conecta</title>
+    <!-- Declaração do tipo de documento e configuração de idioma -->
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Torna a página responsiva em dispositivos móveis -->
+    <title>MDE Conecta</title> <!-- Título da página que aparece na aba do navegador -->
+    
+    <!-- Inclui a biblioteca Chart.js para gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Vincula o arquivo de estilo CSS -->
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+    <!-- Cabeçalho principal -->
     <header>
-        <h1>MDE Conecta</h1>
+        <h1>MDE Conecta</h1> <!-- Título principal da página -->
     </header>
+
+    <!-- Conteúdo principal da página -->
     <main>
+        <!-- Seção de filtros para busca de dados -->
         <section class="filters">
-            <h2>Filtros</h2>
+            <h2>Filtros</h2> <!-- Subtítulo da seção de filtros -->
+            
+            <!-- Filtro por estado -->
             <div class="form-group">
-                <label for="estado">Estado:</label>
-                <select id="estado">
-                    <option value="">Todos</option>
-                    <option value="SP">São Paulo</option>
-                    <option value="RJ">Rio de Janeiro</option>
+                <label for="estado">Estado:</label> <!-- Rótulo para o campo -->
+                <select id="estado"> <!-- Campo de seleção para estados -->
+                    <option value="">Todos</option> <!-- Opção padrão para buscar todos os estados -->
+                    <option value="SP">São Paulo</option> <!-- Estado de São Paulo -->
+                    <option value="RJ">Rio de Janeiro</option> <!-- Estado do Rio de Janeiro -->
                 </select>
             </div>
+            
+            <!-- Filtro por remuneração -->
             <div class="form-group">
-                <label for="remuneracao">Remuneração (R$):</label>
-                <input type="number" id="remuneracao" value="0">
+                <label for="remuneracao">Remuneração (R$):</label> <!-- Rótulo para o campo -->
+                <input type="number" id="remuneracao" value="0"> <!-- Campo de entrada numérica para a remuneração mínima -->
             </div>
+            
+            <!-- Filtro por modalidade esportiva -->
             <div class="form-group">
-                <label for="modalidade">Modalidade Esportiva:</label>
-                <select id="modalidade">
-                    <option value="">Todas</option>
+                <label for="modalidade">Modalidade Esportiva:</label> <!-- Rótulo para o campo -->
+                <select id="modalidade"> <!-- Campo de seleção para modalidades esportivas -->
+                    <option value="">Todas</option> <!-- Opção padrão para buscar todas as modalidades -->
                 </select>
             </div>
+            
+            <!-- Filtro por gênero -->
             <div class="form-group">
-                <label for="genero">Gênero:</label>
-                <select id="genero">
-                    <option value="">Todos</option>
-                    <option value="Feminino">Feminino</option>
-                    <option value="Masculino">Masculino</option>
+                <label for="genero">Gênero:</label> <!-- Rótulo para o campo -->
+                <select id="genero"> <!-- Campo de seleção para gênero -->
+                    <option value="">Todos</option> <!-- Opção padrão para buscar todos os gêneros -->
+                    <option value="Feminino">Feminino</option> <!-- Opção para gênero feminino -->
+                    <option value="Masculino">Masculino</option> <!-- Opção para gênero masculino -->
                 </select>
             </div>
+            
+            <!-- Filtro por estado civil -->
             <div class="form-group">
-                <label for="estadoCivil">Estado Civil:</label>
-                <select id="estadoCivil">
-                    <option value="">Todos</option>
-                    <option value="Solteira(o)">Solteira(o)</option>
-                    <option value="Casada(o)">Casada(o)</option>
-                    <option value="Divorciada(o)">Divorciada(o)</option>
-                    <option value="Viúva(o)">Viúva(o)</option>
+                <label for="estadoCivil">Estado Civil:</label> <!-- Rótulo para o campo -->
+                <select id="estadoCivil"> <!-- Campo de seleção para estado civil -->
+                    <option value="">Todos</option> <!-- Opção padrão para buscar todos os estados civis -->
+                    <option value="Solteira(o)">Solteira(o)</option> <!-- Opção para solteiros -->
+                    <option value="Casada(o)">Casada(o)</option> <!-- Opção para casados -->
+                    <option value="Divorciada(o)">Divorciada(o)</option> <!-- Opção para divorciados -->
+                    <option value="Viúva(o)">Viúva(o)</option> <!-- Opção para viúvos -->
                 </select>
             </div>
+            
+            <!-- Filtro por escolaridade -->
             <div class="form-group">
-                <label for="escolaridade">Escolaridade:</label>
-                <select id="escolaridade">
-                    <option value="">Todas</option>
+                <label for="escolaridade">Escolaridade:</label> <!-- Rótulo para o campo -->
+                <select id="escolaridade"> <!-- Campo de seleção para escolaridade -->
+                    <option value="">Todas</option> <!-- Opção padrão para buscar todas as escolaridades -->
                     <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
                     <option value="Ensino Médio Completo">Ensino Médio Completo</option>
                     <option value="Graduação Completa">Graduação Completa</option>
                     <option value="Pós-Graduação">Pós-Graduação</option>
                 </select>
             </div>
+            
+            <!-- Botão para aplicar os filtros -->
             <button onclick="fetchFilteredData()">Aplicar Filtros</button>
         </section>
+        
+        <!-- Seção para exibição do gráfico -->
         <section class="chart-container">
-            <canvas id="myChart"></canvas>
+            <canvas id="myChart"></canvas> <!-- Elemento para o gráfico gerado pelo Chart.js -->
         </section>
     </main>
+    
+    <!-- Script JavaScript para interatividade e carregamento de dados -->
     <script src="/static/script.js"></script>
 </body>
 </html>
